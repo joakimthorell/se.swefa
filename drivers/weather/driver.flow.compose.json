@@ -1879,5 +1879,612 @@
         }
       ]
     }
+  ],
+  "actions": [
+    {
+      "id": "get_daytime_hourly_forecast",
+      "title": {
+        "en": "Get hourly forecast for a time interval",
+        "sv": "Hämta timprognos för ett tidsintervall",
+        "no": "Hent timeprognose for et tidsintervall"
+      },
+      "titleFormatted": {
+        "en": "Get forecast from hour [[start_hour]] through [[end_hour]]",
+        "sv": "Hämta prognos från kl. [[start_hour]] till [[end_hour]]",
+        "no": "Hent prognose fra kl. [[start_hour]] til [[end_hour]]"
+      },
+      "args": [
+        {
+          "name": "start_hour",
+          "type": "number",
+          "min": 0,
+          "max": 23,
+          "step": 1,
+          "default": 7,
+          "title": {
+            "en": "Start hour (inclusive)",
+            "sv": "Starttimme (inklusive)",
+            "no": "Starttime (inkludert)"
+          }
+        },
+        {
+          "name": "end_hour",
+          "type": "number",
+          "min": 0,
+          "max": 23,
+          "step": 1,
+          "default": 17,
+          "title": {
+            "en": "End hour (inclusive)",
+            "sv": "Sluttimme (inklusive)",
+            "no": "Sluttime (inkludert)"
+          }
+        }
+      ],
+      "tokens": [
+        {
+          "name": "date",
+          "type": "string",
+          "title": {
+            "en": "Start date",
+            "sv": "Startdatum",
+            "no": "Startdato"
+          }
+        },
+        {
+          "name": "end_date",
+          "type": "string",
+          "title": {
+            "en": "End date",
+            "sv": "Slutdatum",
+            "no": "Sluttdato"
+          }
+        },
+        {
+          "name": "source",
+          "type": "string",
+          "title": {
+            "en": "Source",
+            "sv": "Källa",
+            "no": "Kilde"
+          }
+        },
+        {
+          "name": "issued_at",
+          "type": "string",
+          "title": {
+            "en": "Forecast issued",
+            "sv": "Prognosen utfärdad",
+            "no": "Prognosen utstedt"
+          }
+        },
+        {
+          "name": "forecast_json",
+          "type": "string",
+          "title": {
+            "en": "Selected hours (JSON)",
+            "sv": "Valda timmar (JSON)",
+            "no": "Valgte timer (JSON)"
+          }
+        },
+        {
+          "name": "hour_00",
+          "type": "string",
+          "title": {
+            "en": "00:00",
+            "sv": "00:00",
+            "no": "00:00"
+          }
+        },
+        {
+          "name": "hour_01",
+          "type": "string",
+          "title": {
+            "en": "01:00",
+            "sv": "01:00",
+            "no": "01:00"
+          }
+        },
+        {
+          "name": "hour_02",
+          "type": "string",
+          "title": {
+            "en": "02:00",
+            "sv": "02:00",
+            "no": "02:00"
+          }
+        },
+        {
+          "name": "hour_03",
+          "type": "string",
+          "title": {
+            "en": "03:00",
+            "sv": "03:00",
+            "no": "03:00"
+          }
+        },
+        {
+          "name": "hour_04",
+          "type": "string",
+          "title": {
+            "en": "04:00",
+            "sv": "04:00",
+            "no": "04:00"
+          }
+        },
+        {
+          "name": "hour_05",
+          "type": "string",
+          "title": {
+            "en": "05:00",
+            "sv": "05:00",
+            "no": "05:00"
+          }
+        },
+        {
+          "name": "hour_06",
+          "type": "string",
+          "title": {
+            "en": "06:00",
+            "sv": "06:00",
+            "no": "06:00"
+          }
+        },
+        {
+          "name": "hour_07",
+          "type": "string",
+          "title": {
+            "en": "07:00",
+            "sv": "07:00",
+            "no": "07:00"
+          }
+        },
+        {
+          "name": "hour_08",
+          "type": "string",
+          "title": {
+            "en": "08:00",
+            "sv": "08:00",
+            "no": "08:00"
+          }
+        },
+        {
+          "name": "hour_09",
+          "type": "string",
+          "title": {
+            "en": "09:00",
+            "sv": "09:00",
+            "no": "09:00"
+          }
+        },
+        {
+          "name": "hour_10",
+          "type": "string",
+          "title": {
+            "en": "10:00",
+            "sv": "10:00",
+            "no": "10:00"
+          }
+        },
+        {
+          "name": "hour_11",
+          "type": "string",
+          "title": {
+            "en": "11:00",
+            "sv": "11:00",
+            "no": "11:00"
+          }
+        },
+        {
+          "name": "hour_12",
+          "type": "string",
+          "title": {
+            "en": "12:00",
+            "sv": "12:00",
+            "no": "12:00"
+          }
+        },
+        {
+          "name": "hour_13",
+          "type": "string",
+          "title": {
+            "en": "13:00",
+            "sv": "13:00",
+            "no": "13:00"
+          }
+        },
+        {
+          "name": "hour_14",
+          "type": "string",
+          "title": {
+            "en": "14:00",
+            "sv": "14:00",
+            "no": "14:00"
+          }
+        },
+        {
+          "name": "hour_15",
+          "type": "string",
+          "title": {
+            "en": "15:00",
+            "sv": "15:00",
+            "no": "15:00"
+          }
+        },
+        {
+          "name": "hour_16",
+          "type": "string",
+          "title": {
+            "en": "16:00",
+            "sv": "16:00",
+            "no": "16:00"
+          }
+        },
+        {
+          "name": "hour_17",
+          "type": "string",
+          "title": {
+            "en": "17:00",
+            "sv": "17:00",
+            "no": "17:00"
+          }
+        },
+        {
+          "name": "hour_18",
+          "type": "string",
+          "title": {
+            "en": "18:00",
+            "sv": "18:00",
+            "no": "18:00"
+          }
+        },
+        {
+          "name": "hour_19",
+          "type": "string",
+          "title": {
+            "en": "19:00",
+            "sv": "19:00",
+            "no": "19:00"
+          }
+        },
+        {
+          "name": "hour_20",
+          "type": "string",
+          "title": {
+            "en": "20:00",
+            "sv": "20:00",
+            "no": "20:00"
+          }
+        },
+        {
+          "name": "hour_21",
+          "type": "string",
+          "title": {
+            "en": "21:00",
+            "sv": "21:00",
+            "no": "21:00"
+          }
+        },
+        {
+          "name": "hour_22",
+          "type": "string",
+          "title": {
+            "en": "22:00",
+            "sv": "22:00",
+            "no": "22:00"
+          }
+        },
+        {
+          "name": "hour_23",
+          "type": "string",
+          "title": {
+            "en": "23:00",
+            "sv": "23:00",
+            "no": "23:00"
+          }
+        }
+      ],
+      "hint": {
+        "en": "Both hours are included. If the end hour is earlier, the interval ends tomorrow.",
+        "sv": "Båda timmarna ingår. Om sluttimmen är tidigare slutar intervallet nästa dag.",
+        "no": "Begge timer er inkludert. Hvis sluttimen er tidligere, slutter intervallet neste dag."
+      }
+    },
+    {
+      "id": "get_rolling_hourly_forecast",
+      "title": {
+        "en": "Get hourly forecast from now",
+        "sv": "Hämta timprognos från nu",
+        "no": "Hent timeprognose fra nå"
+      },
+      "titleFormatted": {
+        "en": "Get [[hours]] hours from the current hour",
+        "sv": "Hämta [[hours]] timmar från aktuell timme",
+        "no": "Hent [[hours]] timer fra gjeldende time"
+      },
+      "hint": {
+        "en": "Includes the current hour. Eleven hours at 07:59 gives 07–17. Continues across midnight.",
+        "sv": "Aktuell timme ingår. Elva timmar kl. 07:59 ger 07–17. Fortsätter över midnatt.",
+        "no": "Gjeldende time er inkludert. Elleve timer kl. 07:59 gir 07–17. Fortsetter over midnatt."
+      },
+      "args": [
+        {
+          "name": "hours",
+          "type": "number",
+          "min": 1,
+          "max": 24,
+          "step": 1,
+          "default": 11,
+          "title": {
+            "en": "Number of hours",
+            "sv": "Antal timmar",
+            "no": "Antall timer"
+          }
+        }
+      ],
+      "tokens": [
+        {
+          "name": "date",
+          "type": "string",
+          "title": {
+            "en": "Start date",
+            "sv": "Startdatum",
+            "no": "Startdato"
+          }
+        },
+        {
+          "name": "end_date",
+          "type": "string",
+          "title": {
+            "en": "End date",
+            "sv": "Slutdatum",
+            "no": "Sluttdato"
+          }
+        },
+        {
+          "name": "source",
+          "type": "string",
+          "title": {
+            "en": "Source",
+            "sv": "Källa",
+            "no": "Kilde"
+          }
+        },
+        {
+          "name": "issued_at",
+          "type": "string",
+          "title": {
+            "en": "Forecast issued",
+            "sv": "Prognosen utfärdad",
+            "no": "Prognosen utstedt"
+          }
+        },
+        {
+          "name": "forecast_json",
+          "type": "string",
+          "title": {
+            "en": "Selected hours (JSON)",
+            "sv": "Valda timmar (JSON)",
+            "no": "Valgte timer (JSON)"
+          }
+        },
+        {
+          "name": "slot_01",
+          "type": "string",
+          "title": {
+            "en": "Hour 1",
+            "sv": "Timme 1",
+            "no": "Time 1"
+          }
+        },
+        {
+          "name": "slot_02",
+          "type": "string",
+          "title": {
+            "en": "Hour 2",
+            "sv": "Timme 2",
+            "no": "Time 2"
+          }
+        },
+        {
+          "name": "slot_03",
+          "type": "string",
+          "title": {
+            "en": "Hour 3",
+            "sv": "Timme 3",
+            "no": "Time 3"
+          }
+        },
+        {
+          "name": "slot_04",
+          "type": "string",
+          "title": {
+            "en": "Hour 4",
+            "sv": "Timme 4",
+            "no": "Time 4"
+          }
+        },
+        {
+          "name": "slot_05",
+          "type": "string",
+          "title": {
+            "en": "Hour 5",
+            "sv": "Timme 5",
+            "no": "Time 5"
+          }
+        },
+        {
+          "name": "slot_06",
+          "type": "string",
+          "title": {
+            "en": "Hour 6",
+            "sv": "Timme 6",
+            "no": "Time 6"
+          }
+        },
+        {
+          "name": "slot_07",
+          "type": "string",
+          "title": {
+            "en": "Hour 7",
+            "sv": "Timme 7",
+            "no": "Time 7"
+          }
+        },
+        {
+          "name": "slot_08",
+          "type": "string",
+          "title": {
+            "en": "Hour 8",
+            "sv": "Timme 8",
+            "no": "Time 8"
+          }
+        },
+        {
+          "name": "slot_09",
+          "type": "string",
+          "title": {
+            "en": "Hour 9",
+            "sv": "Timme 9",
+            "no": "Time 9"
+          }
+        },
+        {
+          "name": "slot_10",
+          "type": "string",
+          "title": {
+            "en": "Hour 10",
+            "sv": "Timme 10",
+            "no": "Time 10"
+          }
+        },
+        {
+          "name": "slot_11",
+          "type": "string",
+          "title": {
+            "en": "Hour 11",
+            "sv": "Timme 11",
+            "no": "Time 11"
+          }
+        },
+        {
+          "name": "slot_12",
+          "type": "string",
+          "title": {
+            "en": "Hour 12",
+            "sv": "Timme 12",
+            "no": "Time 12"
+          }
+        },
+        {
+          "name": "slot_13",
+          "type": "string",
+          "title": {
+            "en": "Hour 13",
+            "sv": "Timme 13",
+            "no": "Time 13"
+          }
+        },
+        {
+          "name": "slot_14",
+          "type": "string",
+          "title": {
+            "en": "Hour 14",
+            "sv": "Timme 14",
+            "no": "Time 14"
+          }
+        },
+        {
+          "name": "slot_15",
+          "type": "string",
+          "title": {
+            "en": "Hour 15",
+            "sv": "Timme 15",
+            "no": "Time 15"
+          }
+        },
+        {
+          "name": "slot_16",
+          "type": "string",
+          "title": {
+            "en": "Hour 16",
+            "sv": "Timme 16",
+            "no": "Time 16"
+          }
+        },
+        {
+          "name": "slot_17",
+          "type": "string",
+          "title": {
+            "en": "Hour 17",
+            "sv": "Timme 17",
+            "no": "Time 17"
+          }
+        },
+        {
+          "name": "slot_18",
+          "type": "string",
+          "title": {
+            "en": "Hour 18",
+            "sv": "Timme 18",
+            "no": "Time 18"
+          }
+        },
+        {
+          "name": "slot_19",
+          "type": "string",
+          "title": {
+            "en": "Hour 19",
+            "sv": "Timme 19",
+            "no": "Time 19"
+          }
+        },
+        {
+          "name": "slot_20",
+          "type": "string",
+          "title": {
+            "en": "Hour 20",
+            "sv": "Timme 20",
+            "no": "Time 20"
+          }
+        },
+        {
+          "name": "slot_21",
+          "type": "string",
+          "title": {
+            "en": "Hour 21",
+            "sv": "Timme 21",
+            "no": "Time 21"
+          }
+        },
+        {
+          "name": "slot_22",
+          "type": "string",
+          "title": {
+            "en": "Hour 22",
+            "sv": "Timme 22",
+            "no": "Time 22"
+          }
+        },
+        {
+          "name": "slot_23",
+          "type": "string",
+          "title": {
+            "en": "Hour 23",
+            "sv": "Timme 23",
+            "no": "Time 23"
+          }
+        },
+        {
+          "name": "slot_24",
+          "type": "string",
+          "title": {
+            "en": "Hour 24",
+            "sv": "Timme 24",
+            "no": "Time 24"
+          }
+        }
+      ]
+    }
   ]
 }

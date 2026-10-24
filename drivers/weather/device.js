@@ -3,6 +3,7 @@
 const { Device } = require('homey');
 const { requestJson } = require('../../lib/http-json');
 const { calculateFeelsLike } = require('../../lib/feels-like');
+const { getHourlyForecast, getRollingHourlyForecast } = require('../../lib/hourly-forecast');
 const {
   WIND_DIRECTION_CODES,
   formatCoordinate,
@@ -142,6 +143,20 @@ class WeatherDevice extends Device {
     }
 
     return data;
+  }
+
+  async getHourlyForecast(startHour = 7, endHour = 17) {
+    if (!this.weatherData) await this.fetchSMHIData(true);
+    return getHourlyForecast(this.weatherData, {
+      startHour, endHour, timeZone: this.homey.clock.getTimezone(), language: this.homey.i18n.getLanguage(),
+    });
+  }
+
+  async getRollingHourlyForecast(hours = 11) {
+    if (!this.weatherData) await this.fetchSMHIData(true);
+    return getRollingHourlyForecast(this.weatherData, {
+      hours, timeZone: this.homey.clock.getTimezone(), language: this.homey.i18n.getLanguage(),
+    });
   }
 
   async updateCapabilities(settingsOverride = null) {
