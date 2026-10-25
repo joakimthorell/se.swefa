@@ -1900,7 +1900,7 @@
           "min": 0,
           "max": 23,
           "step": 1,
-          "default": 7,
+          "default": 0,
           "title": {
             "en": "Start hour (inclusive)",
             "sv": "Starttimme (inklusive)",
@@ -1913,7 +1913,7 @@
           "min": 0,
           "max": 23,
           "step": 1,
-          "default": 17,
+          "default": 23,
           "title": {
             "en": "End hour (inclusive)",
             "sv": "Sluttimme (inklusive)",
@@ -2203,9 +2203,9 @@
         "no": "Hent [[hours]] timer fra gjeldende time"
       },
       "hint": {
-        "en": "Includes the current hour. Eleven hours at 07:59 gives 07–17. Continues across midnight.",
-        "sv": "Aktuell timme ingår. Elva timmar kl. 07:59 ger 07–17. Fortsätter över midnatt.",
-        "no": "Gjeldende time er inkludert. Elleve timer kl. 07:59 gir 07–17. Fortsetter over midnatt."
+        "en": "Includes the current hour. Select 1–24 hours. Continues across midnight.",
+        "sv": "Aktuell timme ingår. Välj 1–24 timmar. Fortsätter över midnatt.",
+        "no": "Gjeldende time er inkludert. Velg 1–24 timer. Fortsetter over midnatt."
       },
       "args": [
         {
@@ -2214,7 +2214,7 @@
           "min": 1,
           "max": 24,
           "step": 1,
-          "default": 11,
+          "default": 1,
           "title": {
             "en": "Number of hours",
             "sv": "Antal timmar",

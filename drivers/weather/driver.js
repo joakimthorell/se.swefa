@@ -27,7 +27,7 @@ class WeatherDriver extends Driver {
 
   registerFlowActions() {
     this.homey.flow.getActionCard('get_rolling_hourly_forecast')
-      .registerRunListener(async ({ device, hours = 11 }) => device.getRollingHourlyForecast(hours));
+      .registerRunListener(async ({ device, hours = 1 }) => device.getRollingHourlyForecast(hours));
     this.homey.flow.getActionCard('get_daytime_hourly_forecast')
       .registerRunListener(async ({ device, start_hour = 7, end_hour = 17 }) => {
         return device.getHourlyForecast(start_hour, end_hour);

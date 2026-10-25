@@ -145,14 +145,14 @@ class WeatherDevice extends Device {
     return data;
   }
 
-  async getHourlyForecast(startHour = 7, endHour = 17) {
+  async getHourlyForecast(startHour = 0, endHour = 23) {
     if (!this.weatherData) await this.fetchSMHIData(true);
     return getHourlyForecast(this.weatherData, {
       startHour, endHour, timeZone: this.homey.clock.getTimezone(), language: this.homey.i18n.getLanguage(),
     });
   }
 
-  async getRollingHourlyForecast(hours = 11) {
+  async getRollingHourlyForecast(hours = 1) {
     if (!this.weatherData) await this.fetchSMHIData(true);
     return getRollingHourlyForecast(this.weatherData, {
       hours, timeZone: this.homey.clock.getTimezone(), language: this.homey.i18n.getLanguage(),

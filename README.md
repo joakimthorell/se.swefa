@@ -179,11 +179,11 @@ See the Git history and Homey changelog for older release notes.
 
 Two weather-device actions expose the cached SMHI forecast for dashboard displays and other flows:
 
-* **Get hourly forecast for a time interval** accepts start and end clock hours (00–23), both inclusive. The interval starts on the current local calendar date. An earlier end hour means the next day: 22–02 selects 22, 23, 00, 01 and 02. Equal start/end selects one hour; 00–23 selects a full day. The default interval is 07–17.
-* **Get hourly forecast from now** accepts a count of 1–24 hours including the current local hour. A count of eleven at 07:59 selects 07–17, changing to 08–18 at 08:00. Hours continue across midnight. Rolling slots represent successive actual hours, so they distinguish a repeated autumn hour and skip a nonexistent spring hour.
+* **Get hourly forecast for a time interval** accepts start and end clock hours (00–23), both inclusive. The interval starts on the current local calendar date. An earlier end hour means the next day: 22–02 selects 22, 23, 00, 01 and 02. Equal start/end selects one hour; 00–23 selects a full day. The default interval is 00–23.
+* **Get hourly forecast from now** accepts a count of 1–24 hours including the current local hour, defaulting to one hour. A count of eleven at 07:59 selects 07–17, changing to 08–18 at 08:00. Hours continue across midnight. Rolling slots represent successive actual hours, so they distinguish a repeated autumn hour and skip a nonexistent spring hour.
 
 Both actions return the start date, end date, source, issue time and `forecast_json`, an ordered array containing each selected hour's local date, hour, UTC timestamp, availability and numeric weather values. The fixed-interval action also returns `hour_00` through `hour_23` text tokens (unselected hours are empty). The rolling action returns `slot_01` through `slot_24` text tokens, each including its clock-hour label; slots beyond the requested count are empty. Fixed clock-hour tokens use the first occurrence of a repeated autumn clock hour.
 
 Hourly text contains a weather symbol, temperature and mean precipitation intensity (mm/h), formatted as Markdown/HTML line breaks for dashboard text widgets. Missing selected hours are reported as unavailable, never replaced with a neighbouring hour or another day's values. These are forecasts; already elapsed hours may be absent from SMHI's current response. Labels and number formatting follow Homey's English, Swedish or Norwegian language setting.
 
-The existing internal fixed-interval card ID and the 07–17 default are retained so previously configured local flows continue to work. Time selection is independent of dashboard layout. No extra service or API credentials are required.
+Both Flow cards are introduced by this contribution. The fixed-interval card defaults to 00–23. Time selection is independent of dashboard layout. No extra service or API credentials are required.

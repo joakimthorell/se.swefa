@@ -3,7 +3,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const { getHourlyForecast, getRollingHourlyForecast } = require('../lib/hourly-forecast');
 const getDaytimeForecast = (data, now, timeZone = 'Europe/Stockholm', language = 'sv') =>
-  getHourlyForecast(data, { now, timeZone, language });
+  getHourlyForecast(data, { startHour: 7, endHour: 17, now, timeZone, language });
 const point = (time, temp = 10) => ({ time, data: { air_temperature: temp, precipitation_amount_mean: 0, symbol_code: 1 } });
 
 test('emits exactly eleven local hours, excludes neighbouring days and outside hours', () => {
@@ -129,4 +129,69 @@ test('rolling forecasts support one to twenty-four hours and reject invalid coun
   for (const hours of [0, 25, -1, 1.5, '11', NaN]) {
     assert.throws(() => getRollingHourlyForecast({ timeSeries: [] }, { hours }), RangeError);
   }
+});
+
+for (const mode of ['fixed', 'rolling']) {
+  const forecast = (values, intervalStart = undefined) => {
+    const data = { timeSeries: [{
+      time: '2026-10-24T05:00:00Z', intervalParametersStartTime: intervalStart,
+      data: { air_temperature: 0, precipitation_amount_mean: 0, symbol_code: 1, ...values },
+    }] };
+    const options = { now: new Date('2026-10-24T05:30:00Z') };
+    const result = mode === 'fixed'
+      ? getHourlyForecast(data, { ...options, startHour: 7, endHour: 7 })
+      : getRollingHourlyForecast(data, { ...options, hours: 1 });
+    return {
+      text: result[mode === 'fixed' ? 'hour_07' : 'slot_01'],
+      hour: JSON.parse(result.forecast_json)[0],
+    };
+  };
+
+  test(`${mode}: missing temperature sentinel makes the hour unavailable`, () => {
+    const { text, hour } = forecast({ air_temperature: 9999 });
+    assert.match(text, /Prognos saknas/);
+    assert.doesNotMatch(text, /9999/);
+    assert.equal(hour.available, false);
+    assert.equal(hour.temperature, null);
+    assert.equal(hour.symbol, null);
+    assert.equal(hour.precipitation_mm_per_hour, null);
+  });
+
+  test(`${mode}: missing precipitation sentinel is rejected before rate conversion`, () => {
+    const { text, hour } = forecast({ precipitation_amount_mean: 9999 }, '2026-10-24T03:00:00Z');
+    assert.match(text, /— mm\/h/);
+    assert.doesNotMatch(text, /9999|4999/);
+    assert.equal(hour.available, true);
+    assert.equal(hour.temperature, 0);
+    assert.equal(hour.symbol, 1);
+    assert.equal(hour.precipitation_mm_per_hour, null);
+  });
+
+  test(`${mode}: missing symbol sentinel is not exposed as an observation`, () => {
+    const { text, hour } = forecast({ symbol_code: 9999 });
+    assert.match(text, /—<br>\*\*0°\*\*/);
+    assert.doesNotMatch(text, /9999|☀️/);
+    assert.equal(hour.available, true);
+    assert.equal(hour.temperature, 0);
+    assert.equal(hour.symbol, null);
+    assert.equal(hour.precipitation_mm_per_hour, 0);
+  });
+
+  test(`${mode}: valid zero temperature and precipitation remain available`, () => {
+    const { text, hour } = forecast({});
+    assert.match(text, /☀️<br>\*\*0°\*\*<br>0 mm\/h/);
+    assert.equal(hour.available, true);
+    assert.equal(hour.temperature, 0);
+    assert.equal(hour.precipitation_mm_per_hour, 0);
+  });
+}
+
+
+test('defaults to a full fixed day and one rolling hour', () => {
+  const options = { now: new Date('2026-10-24T05:30:00Z') };
+  const fixed = JSON.parse(getHourlyForecast({ timeSeries: [] }, options).forecast_json);
+  assert.deepEqual(fixed.map(entry => entry.hour), Array.from({ length: 24 }, (_, hour) => hour));
+  const rolling = getRollingHourlyForecast({ timeSeries: [] }, options);
+  assert.deepEqual(JSON.parse(rolling.forecast_json).map(entry => entry.hour), [7]);
+  assert.equal(rolling.slot_02, '');
 });
