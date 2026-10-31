@@ -1,6 +1,7 @@
 'use strict';
 
 const { Device } = require('homey');
+const { getLocale } = require('../../lib/i18n-utils');
 const { formatCoordinate } = require('../../lib/weather-utils');
 const {
   getLevelRank,
@@ -103,8 +104,7 @@ class WarningDevice extends Device {
     const date = new Date(value);
     if (!Number.isFinite(date.getTime())) return '';
 
-    const language = this.homey.i18n.getLanguage();
-    const locale = { en: 'en-GB', sv: 'sv-SE', no: 'nb-NO' }[language] ?? 'en-GB';
+    const locale = getLocale(this.homey.i18n.getLanguage());
 
     return new Intl.DateTimeFormat(locale, {
       timeZone: this.homey.clock.getTimezone(),

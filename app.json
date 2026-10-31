@@ -3511,9 +3511,9 @@
           "no": "Hent timeprognose for et tidsintervall"
         },
         "titleFormatted": {
-          "en": "Get forecast from hour [[start_hour]] through [[end_hour]]",
-          "sv": "Hämta prognos från kl. [[start_hour]] till [[end_hour]]",
-          "no": "Hent prognose fra kl. [[start_hour]] til [[end_hour]]"
+          "en": "Get hourly forecast [[start_hour]]–[[end_hour]]",
+          "sv": "Hämta timprognos kl. [[start_hour]]–[[end_hour]]",
+          "no": "Hent timeprognose kl. [[start_hour]]–[[end_hour]]"
         },
         "args": [
           {
@@ -3812,9 +3812,9 @@
           }
         ],
         "hint": {
-          "en": "Both hours are included. If the end hour is earlier, the interval ends tomorrow.",
-          "sv": "Båda timmarna ingår. Om sluttimmen är tidigare slutar intervallet nästa dag.",
-          "no": "Begge timer er inkludert. Hvis sluttimen er tidligere, slutter intervallet neste dag."
+          "en": "Weather icon, temperature and precipitation per hour. Earlier end: tomorrow.",
+          "sv": "Väderikon, temperatur och nederbörd per timme. Tidigare sluttid: nästa dag.",
+          "no": "Værikon, temperatur og nedbør per time. Tidligere sluttid: neste dag."
         }
       },
       {
@@ -3825,14 +3825,14 @@
           "no": "Hent timeprognose fra nå"
         },
         "titleFormatted": {
-          "en": "Get [[hours]] hours from the current hour",
-          "sv": "Hämta [[hours]] timmar från aktuell timme",
-          "no": "Hent [[hours]] timer fra gjeldende time"
+          "en": "Get hourly forecast for [[hours]] hours",
+          "sv": "Hämta timprognos för [[hours]] timmar",
+          "no": "Hent timeprognose for [[hours]] timer"
         },
         "hint": {
-          "en": "Includes the current hour. Select 1–24 hours. Continues across midnight.",
-          "sv": "Aktuell timme ingår. Välj 1–24 timmar. Fortsätter över midnatt.",
-          "no": "Gjeldende time er inkludert. Velg 1–24 timer. Fortsetter over midnatt."
+          "en": "Weather icon, temperature and precipitation per hour. Starts at the forecast time nearest to now, before or after.",
+          "sv": "Väderikon, temperatur och nederbörd per timme. Börjar vid prognostiden närmast nu, före eller efter.",
+          "no": "Værikon, temperatur og nedbør per time. Starter ved prognosetiden nærmest nå, før eller etter."
         },
         "args": [
           {

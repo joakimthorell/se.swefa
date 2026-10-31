@@ -1,6 +1,7 @@
 'use strict';
 
 const { Device } = require('homey');
+const { getLocale } = require('../../lib/i18n-utils');
 const { latestObservation } = require('../../lib/ocean-utils');
 
 const SEA_LEVEL_MAX_AGE_MS = 2 * 60 * 60 * 1000;
@@ -99,11 +100,7 @@ class SeaLevelDevice extends Device {
     const date = new Date(timestamp);
     if (!Number.isFinite(date.getTime())) return '';
 
-    const locale = {
-      en: 'en-GB',
-      sv: 'sv-SE',
-      no: 'nb-NO',
-    }[this.homey.i18n.getLanguage()] ?? 'en-GB';
+    const locale = getLocale(this.homey.i18n.getLanguage());
 
     return new Intl.DateTimeFormat(locale, {
       timeZone: this.homey.clock.getTimezone(),

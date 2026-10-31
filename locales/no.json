@@ -84,5 +84,6 @@
   "fire_risk_dryness_6": "Ekstremt tørt",
   "ocean_quality_g": "G – Kontrollert og godkjent",
   "ocean_quality_y": "Y – Grovt kontrollert / mistenkt / aggregert",
-  "ocean_quality_o": "O – Ukontrollert"
+  "ocean_quality_o": "O – Ukontrollert",
+  "hourly_forecast_missing": "Ingen prognose"
 }
